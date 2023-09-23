@@ -29,7 +29,7 @@ export default function Login() {
       </View>
       <TouchableOpacity
         onPress={() => {
-          navigation.navigate("Home");
+          navigation.navigate("BMI");
         }}>
         <View className="w-[300px] h-[70px] bg-blue-700 rounded-3xl flex items-center justify-center">
           <Text className="text-xl text-white font-bold">Đăng nhập</Text>
