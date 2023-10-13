@@ -1,56 +1,58 @@
-import { View, Text, Image, TouchableOpacity } from "react-native";
-import React from "react";
-import user1 from "../assets/img/3d1.png";
-import user2 from "../assets/img/3d2.png";
-import user3 from "../assets/img/3d3.png";
-import user4 from "../assets/img/3d4.png";
-import user5 from "../assets/img/3d5.png";
-import user6 from "../assets/img/3d6.png";
+import React from 'react'
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs'
+import Profile from './Profile'
+import Like from './Like'
+import Scan from './Scan'
+
+// Import Icon
+import { Foundation, FontAwesome } from '@expo/vector-icons'
+
+const Tab = createMaterialBottomTabNavigator()
 
 export default function Home() {
   return (
-    <View className="w-full h-full flex items-center relative">
-      <View className="absolute top-16 left-6">
-        <Text className="flex flex-row items-center font-bold text-4xl">
-          <Text className="text-blue-700">Blue</Text>
-          <Text>der</Text>
-        </Text>
-      </View>
-      <Image
-        source={user1}
-        className="absolute right-4 top-16 rounded-full w-[150px] h-[150px]"
+    <Tab.Navigator
+      labeled={false}
+      initialRouteName='Scan'
+      activeColor='#000AFFE0'
+      barStyle={{ backgroundColor: '#fff' }}
+    >
+      <Tab.Screen
+        name='Like'
+        component={Like}
+        options={{
+          tabBarIcon: ({ color, focused }) => {
+            if (focused) {
+              return <Foundation name='heart' size={30} color={"#F55858"} />
+            }
+            return <Foundation name='heart' size={28} />
+          },
+        }}
       />
-      <Image
-        source={user2}
-        className="absolute right-10 top-[30%] rounded-full w-[160px] h-[160px]"
+      <Tab.Screen
+        name='Scan'
+        component={Scan}
+        options={{
+          tabBarIcon: ({ color, focused }) => {
+            if (focused) {
+              return <FontAwesome name='home' size={32} color={color} />
+            }
+            return <FontAwesome name='home' size={30} />
+          }
+        }}
       />
-      <Image
-        source={user3}
-        className="absolute left-2 top-[18%] rounded-full w-[180px] h-[180px]"
+      <Tab.Screen
+        name='Profile'
+        component={Profile}
+        options={{
+          tabBarIcon: ({ color, focused }) => {
+            if (focused) {
+              return <FontAwesome name='user' size={32} color={"#FFEC40"} />
+            }
+            return <FontAwesome name='user' size={30} />
+          }
+        }}
       />
-      <Image
-        source={user4}
-        className="absolute -left-16 top-[40%] rounded-full w-[150px] h-[150px]"
-      />
-      <Image
-        source={user5}
-        className="absolute -right-16 top-[50%] rounded-full w-[150px] h-[150px]"
-      />
-      <Image
-        source={user6}
-        className="absolute right-[30%] bottom-[30%] rounded-full w-[170px] h-[170px]"
-      />
-      <View className="absolute bottom-10">
-        <View className="flex items-center flex-col mb-8">
-          <Text className="text-4xl tracking-widest">Hãy tiềm người</Text>
-          <Text className="text-4xl tracking-widest">bạn đầu tiên nào</Text>
-        </View>
-        <TouchableOpacity>
-          <View className="w-[300px] h-[70px] bg-blue-700 rounded-3xl flex items-center justify-center mb-5">
-            <Text className="text-3xl text-white font-bold">Bắt đầu</Text>
-          </View>
-        </TouchableOpacity>
-      </View>
-    </View>
-  );
+    </Tab.Navigator>
+  )
 }
