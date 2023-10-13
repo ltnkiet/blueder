@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react'
 import {
   View,
@@ -12,8 +13,10 @@ import {
 // Import image
 import user1 from '../assets/img/3d1.png'
 
+
 // Import icon
 import { Feather } from '@expo/vector-icons'
+
 
 export default function Scan() {
   const [loading, setLoading] = useState(false)
@@ -29,6 +32,7 @@ export default function Scan() {
           <Feather name='bell' size={30} color='#000AFFE0' />
         </TouchableOpacity>
       </View>
+
       <View className='flex-row items-center justify-between border rounded-3xl w-11/12 mb-8'>
         <View className='px-3'>
           <Feather name='search' size={24} color='black' />
@@ -81,7 +85,10 @@ export default function Scan() {
             </View>
           </ScrollView>
         )}
+
       </View>
     </View>
   )
 }
+
+

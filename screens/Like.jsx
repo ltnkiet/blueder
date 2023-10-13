@@ -1,3 +1,4 @@
+
 import { View, Text, TouchableOpacity, Image } from 'react-native'
 import {Badge} from 'react-native-paper'
 import React from 'react'
@@ -39,3 +40,4 @@ export default function Like() {
     </View>
   )
 }
+
