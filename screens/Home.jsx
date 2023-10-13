@@ -23,10 +23,12 @@ export default function Home() {
         options={{
           tabBarIcon: ({ color, focused }) => {
             if (focused) {
-              return <Foundation name='heart' size={30} color={'#F55858'} />
+
+              return <Foundation name='heart' size={30} color={"#F55858"} />
             }
             return <Foundation name='heart' size={28} />
-          }
+          },
+
         }}
       />
       <Tab.Screen
@@ -47,7 +49,9 @@ export default function Home() {
         options={{
           tabBarIcon: ({ color, focused }) => {
             if (focused) {
-              return <FontAwesome name='user' size={32} color={'#FFEC40'} />
+
+              return <FontAwesome name='user' size={32} color={"#FFEC40"} />
+
             }
             return <FontAwesome name='user' size={30} />
           }
