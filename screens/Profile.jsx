@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { View, Text, TouchableOpacity, Image, ScrollView } from "react-native";
 import { Badge } from "react-native-paper";
@@ -16,6 +17,7 @@ import user1 from "../assets/img/3d1.png";
 
 // Import icon
 import { Feather } from "@expo/vector-icons";
+
 
 export default function Profile() {
   const [user, setUser] = useState([]);
@@ -52,7 +54,6 @@ export default function Profile() {
   }, []);
 
   return (
-    
     <View className="w-full h-full flex items-center">
       <View className="flex-row items-center justify-between w-11/12 pt-8 pb-6">
         <Text className="flex flex-row items-center font-bold text-4xl">
