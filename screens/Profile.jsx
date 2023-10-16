@@ -5,7 +5,8 @@ import {
   TouchableOpacity,
   Image,
   ScrollView,
-  SafeAreaView
+  SafeAreaView,
+  ActivityIndicator
 } from 'react-native'
 import { Badge } from 'react-native-paper'
 import { onAuthStateChanged } from 'firebase/auth'
@@ -50,9 +51,8 @@ export default function Profile() {
       unsubscribe()
     }
   }, [])
-
-  const { name, age, email, address, gender, bio, relationship } = userData
-
+  
+const { name, age, email, address, gender, bio, relationship } = userData
   return (
     <SafeAreaView>
       <View className='w-full h-full flex items-center'>
@@ -79,7 +79,7 @@ export default function Profile() {
             <Row data={gender} title='Giới Tính' />
             <Row data={address} title='Địa chỉ' />
             <Row data={relationship} title='Tình trạng' />
-            <View className='min-h-[200px] bg-slate-200 rounded-[35px] mt-3'>
+            <View className='min-h-[200px] bg-slate-200 rounded-[35px] my-3'>
               <View className='ml-7 mt-3'>
                 <Text className='text-2xl font-bold '>Bio</Text>
                 <Text className='text-lg'>{bio}</Text>
