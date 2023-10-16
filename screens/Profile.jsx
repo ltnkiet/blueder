@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react'
 import {
   View,
@@ -14,10 +15,11 @@ import { FIREBASE_AUTH, FIREBASE_DB } from '../config/firebase'
 import { collection, query, where, getDocs } from 'firebase/firestore'
 
 // Import image
-import user1 from '../assets/img/3d1.png'
+import user1 from "../assets/img/3d1.png";
 
 // Import icon
-import { Feather } from '@expo/vector-icons'
+import { Feather } from "@expo/vector-icons";
+
 
 // Custom component UI
 const Row = ({ data, title }) => (
@@ -91,3 +93,4 @@ const { name, age, email, address, gender, bio, relationship } = userData
     </SafeAreaView>
   )
 }
+
