@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
   View,
   Text,
@@ -12,14 +12,38 @@ import {
 
 // Import image
 import user1 from '../assets/img/3d1.png'
-
-
 // Import icon
 import { Feather } from '@expo/vector-icons'
-
+//Import firestore
+import { getFirestore, collection, getDocs } from 'firebase/firestore';
+import { app } from '../config/firebase';
 
 export default function Scan() {
   const [loading, setLoading] = useState(false)
+  const [users, setUsers] = useState([])
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const firestore = getFirestore(app);
+      const userCollection = collection(firestore, 'User');
+      try {
+        const querySnapshot = await getDocs(userCollection);
+        // Lặp qua kết quả và cập nhật mảng người dùng
+        const userData = [];
+        querySnapshot.forEach((doc) => {
+          userData.push(doc.data());
+        });
+        console.log(userData)
+        setUsers(userData);
+        setLoading(false); // Đã tải xong, đặt loading thành false
+      } catch (error) {
+        console.error('Lỗi khi lấy dữ liệu người dùng:', error);
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <View className='w-full h-full flex items-center'>
@@ -51,38 +75,12 @@ export default function Scan() {
           />
         ) : (
           <ScrollView>
-            <View className='flex-row items-center bg-[#AAD3FE] h-20 rounded-2xl mb-4'>
+            {users.map((user, index) => (
+            <View key={index} className='flex-row items-center bg-[#AAD3FE] h-20 rounded-2xl mb-4'>
               <Image className='w-12 h-12 rounded-full mx-5' source={user1} />
-              <Text className='text-xl font-bold'>Nhật Kha</Text>
+              <Text className='text-xl font-bold'>{user.name}</Text>
             </View>
-            <View className='flex-row items-center bg-[#AAD3FE] h-20 rounded-2xl mb-4'>
-              <Image className='w-12 h-12 rounded-full mx-5' source={user1} />
-              <Text className='text-xl font-bold'>Celia Nolan</Text>
-            </View>
-            <View className='flex-row items-center bg-[#AAD3FE] h-20 rounded-2xl mb-4'>
-              <Image className='w-12 h-12 rounded-full mx-5' source={user1} />
-              <Text className='text-xl font-bold'>Fred Franecki</Text>
-            </View>
-            <View className='flex-row items-center bg-[#AAD3FE] h-20 rounded-2xl mb-4'>
-              <Image className='w-12 h-12 rounded-full mx-5' source={user1} />
-              <Text className='text-xl font-bold'>Glen Lockman</Text>
-            </View>
-            <View className='flex-row items-center bg-[#AAD3FE] h-20 rounded-2xl mb-4'>
-              <Image className='w-12 h-12 rounded-full mx-5' source={user1} />
-              <Text className='text-xl font-bold'>Miss Abraham Greenholt</Text>
-            </View>
-            <View className='flex-row items-center bg-[#AAD3FE] h-20 rounded-2xl mb-4'>
-              <Image className='w-12 h-12 rounded-full mx-5' source={user1} />
-              <Text className='text-xl font-bold'>Gerald Jacobs</Text>
-            </View>
-            <View className='flex-row items-center bg-[#AAD3FE] h-20 rounded-2xl mb-4'>
-              <Image className='w-12 h-12 rounded-full mx-5' source={user1} />
-              <Text className='text-xl font-bold'>Lana Gaylord</Text>
-            </View>
-            <View className='flex-row items-center bg-[#AAD3FE] h-20 rounded-2xl mb-4'>
-              <Image className='w-12 h-12 rounded-full mx-5' source={user1} />
-              <Text className='text-xl font-bold'>Eleanor Hilll</Text>
-            </View>
+            ))}
           </ScrollView>
         )}
 
