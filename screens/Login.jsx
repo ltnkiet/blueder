@@ -3,59 +3,39 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  Alert,
   ActivityIndicator,
   Keyboard,
+  Button
 } from 'react-native'
 import React, { useState } from 'react'
 import { AntDesign } from '@expo/vector-icons'
 import { useNavigation } from '@react-navigation/native'
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
-import { app } from '../config/firebase'
+import { signInWithEmailAndPassword } from 'firebase/auth'
+import { FIREBASE_AUTH } from '../config/firebase'
 
 export default function Login() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false) // Set loading to false on URL change
   const navigation = useNavigation()
-  const firebaseAuth = getAuth(app)
 
   const Login = async () => {
     setLoading(true)
     Keyboard.dismiss()
-    await signInWithEmailAndPassword(firebaseAuth, email, password)
-      .then(() => {
-        Alert.alert('Đăng nhập thành công', 'Success Message', [
-          {
-            text: 'Cancel',
-            onPress: () => Alert.alert('Cancel Pressed'),
-            style: 'cancel'
-          },
-          {
-            text: 'OK',
-            onPress: () => navigation.navigate('PreHome')
-          }
-        ])
-        setLoading(false)
-      })
-      .catch((error) => {
-        Alert.alert(
-          'Đăng nhập thất bại',
-          'Error Message',
-          [
-            {
-              text: 'Hủy',
-              onPress: () => Alert.alert('Cancel Pressed'),
-              style: 'cancel'
-            }
-          ],
-          {
-            cancelable: true
-          }
-        )
-        console.log(error)
-        setLoading(false)
-      })
+    try {
+      const response = await signInWithEmailAndPassword(
+        FIREBASE_AUTH,
+        email,
+        password
+      )
+      if (response) {
+        navigation.navigate('Home')
+      }
+    } catch (error) {
+      alert('Đăng nhập thất bại ' + error.code , error.message)
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
@@ -80,15 +60,19 @@ export default function Login() {
         <View className='mb-10'>
           <Text className='mx-5 text-base font-semibold'>Email</Text>
           <TextInput
+            keyboardType='email-address'
             className='border-2 w-[300px] h-[60px] border-slate-700 text-base rounded-3xl mt-3 px-5'
+            value={email}
             onChangeText={(mail) => setEmail(mail)}
           />
         </View>
         <View>
           <Text className='mx-5 text-base font-semibold'>Mật khẩu</Text>
           <TextInput
+            keyboardType='default'
             secureTextEntry={true}
             className='border-2 w-[300px] h-[60px] border-slate-700 text-base rounded-3xl mt-3 px-5'
+            value={password}
             onChangeText={(pw) => setPassword(pw)}
           />
         </View>
@@ -107,8 +91,7 @@ export default function Login() {
             }}
             className='text-blue-700'
           >
-            {' '}
-            Tạo tài khoản
+            &nbsp; Tạo tài khoản
           </Text>
         </Text>
       </View>

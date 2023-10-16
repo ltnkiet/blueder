@@ -1,9 +1,17 @@
-import { View, Text, TextInput, TouchableOpacity, Alert, ActivityIndicator, Keyboard } from 'react-native'
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  Alert,
+  ActivityIndicator,
+  Keyboard
+} from 'react-native'
 import React, { useState } from 'react'
 import { useNavigation } from '@react-navigation/native'
-import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth'
-import { app } from '../config/firebase'
-import { getFirestore, collection, addDoc } from 'firebase/firestore'
+import { createUserWithEmailAndPassword } from 'firebase/auth'
+import { FIREBASE_AUTH, FIREBASE_DB } from '../config/firebase'
+import { collection, addDoc } from 'firebase/firestore'
 
 export default function Register() {
   const [name, setName] = useState(' ')
@@ -18,14 +26,12 @@ export default function Register() {
   const [loading, setLoading] = useState(false) // Set loading to false on URL change
 
   const navigation = useNavigation()
-  const firebaseAuth = getAuth(app)
-  const firestore = getFirestore(app)
 
-  const register = async () => {
+  const Register = async () => {
     Keyboard.dismiss()
     setLoading(true)
-    await createUserWithEmailAndPassword(firebaseAuth, email, passWord)
-    const userDocRef = await addDoc(collection(firestore, 'User'), {
+    await createUserWithEmailAndPassword(FIREBASE_AUTH, email, passWord)
+    await addDoc(collection(FIREBASE_DB, 'User'), {
       name: name,
       email: email,
       password: passWord,
@@ -47,7 +53,6 @@ export default function Register() {
             onPress: () => navigation.navigate('Login')
           }
         ])
-        setLoading(false)
         navigation.navigate('Login')
       })
       .catch((error) => {
@@ -65,7 +70,9 @@ export default function Register() {
             cancelable: true
           }
         )
-        console.log(error)
+        console.log(error.message)
+      })
+      .finally(() => {
         setLoading(false)
       })
   }
@@ -85,7 +92,7 @@ export default function Register() {
           <Text>der</Text>
         </Text>
       </View>
-      <View className='flex-col gap-2 mb-4 w-11/12'>
+            <View className='flex-col gap-2 mb-4 w-11/12'>
         <View>
           <Text className='mx-5 text-base font-semibold'>Tên người dùng</Text>
           <TextInput
@@ -151,7 +158,7 @@ export default function Register() {
           </View>
           <TouchableOpacity>
             <View className='w-[160px] h-[33px] bg-blue-700 rounded-3xl flex items-center justify-center mb-2'>
-              <Text onPress={register} className='text-lg text-white font-bold'>
+              <Text onPress={Register} className='text-lg text-white font-bold'>
                 Đăng ký
               </Text>
             </View>
