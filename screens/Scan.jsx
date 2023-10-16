@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react'
 import {
   View,
@@ -13,10 +12,8 @@ import {
 // Import image
 import user1 from '../assets/img/3d1.png'
 
-
 // Import icon
 import { Feather } from '@expo/vector-icons'
-
 
 export default function Scan() {
   const [loading, setLoading] = useState(false)
@@ -85,10 +82,7 @@ export default function Scan() {
             </View>
           </ScrollView>
         )}
-
       </View>
     </View>
   )
 }
-
-
