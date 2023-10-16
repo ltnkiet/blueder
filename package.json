@@ -4,21 +4,22 @@
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
     "start": "expo start",
-    "android": "expo start --android --port 9880",
+    "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web"
   },
   "dependencies": {
-    "@react-native-async-storage/async-storage": "^1.19.3",
     "@react-navigation/material-bottom-tabs": "^6.2.17",
     "@react-navigation/native": "^6.1.7",
     "@react-navigation/native-stack": "^6.9.13",
     "expo": "~49.0.8",
+    "expo-splash-screen": "~0.20.5",
     "expo-status-bar": "~1.6.0",
     "firebase": "^10.5.0",
     "nativewind": "^2.0.11",
     "react": "18.2.0",
     "react-native": "0.72.5",
+    "react-native-gesture-handler": "~2.12.0",
     "react-native-paper": "^5.10.6",
     "react-native-vector-icons": "^10.0.0"
   },

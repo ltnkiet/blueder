@@ -1,5 +1,9 @@
+<<<<<<< HEAD
 
 import React, { useState, useEffect } from 'react'
+=======
+import React, { useState } from 'react'
+>>>>>>> 827126654ec6136a7b43d6048aa8be84fa2e810c
 import {
   View,
   Text,
@@ -12,11 +16,17 @@ import {
 
 // Import image
 import user1 from '../assets/img/3d1.png'
+<<<<<<< HEAD
 // Import icon
 import { Feather } from '@expo/vector-icons'
 //Import firestore
 import { getFirestore, collection, getDocs } from 'firebase/firestore';
 import { app } from '../config/firebase';
+=======
+
+// Import icon
+import { Feather } from '@expo/vector-icons'
+>>>>>>> 827126654ec6136a7b43d6048aa8be84fa2e810c
 
 export default function Scan() {
   const [loading, setLoading] = useState(false)
@@ -83,10 +93,7 @@ export default function Scan() {
             ))}
           </ScrollView>
         )}
-
       </View>
     </View>
   )
 }
-
-
