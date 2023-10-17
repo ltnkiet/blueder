@@ -17,7 +17,7 @@ export default function Home() {
       activeColor='#000AFFE0'
       barStyle={{ backgroundColor: '#fff' }}
     >
-      <Tab.Screen
+      {/* <Tab.Screen
         name='Like'
         component={Like}
         options={{
@@ -29,7 +29,7 @@ export default function Home() {
           }
 
         }}
-      />
+      /> */}
       <Tab.Screen
         name='Scan'
         component={Scan}

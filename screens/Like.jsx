@@ -1,15 +1,17 @@
-
 import { View, Text, TouchableOpacity, Image } from 'react-native'
 import {Badge} from 'react-native-paper'
 import React from 'react'
-
 //Import image
 import user from '../assets/img/3d_unbg.png'
-
 // Import icon
 import { Feather, AntDesign, Foundation } from '@expo/vector-icons'
 
+import { useRoute } from '@react-navigation/native';
+
 export default function Like() {
+  const route = useRoute();
+  const { userData } = route.params;
+
   return (
     <View className='w-full h-full flex items-center'>
       <View className='flex-row items-center justify-between w-11/12 pt-8 pb-6'>
@@ -24,9 +26,11 @@ export default function Like() {
       </View>
       <View className='flex-1 justify-center bg-[#AAD3FE] w-11/12 rounded-[35px]'>
         <Image className='self-center' source={user} />
-        <View className='ml-5 mt-2'>
-          <Text className='font-bold text-3xl'>Nhật Kha, 20</Text>
-          <Text className='font-medium text-base'>Quận Tân Phú, TP.HCM</Text>
+        <View className='ml-6 mt-2'>
+          <Text className='font-bold text-3xl'>{userData.name}</Text>
+          <Text className='font-medium text-xl'>{userData.address}</Text>
+          <Text className='font-medium text-lg'>{userData.relationship}</Text>
+          <Text className='font-medium text-base'>{userData.bio}</Text>
         </View>
       </View>
       <View className='flex flex-row justify-around w-full mb-5 mt-8'>

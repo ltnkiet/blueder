@@ -35,21 +35,17 @@ export default function Profile() {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(FIREBASE_AUTH, async (user) => {
       if (user) {
-        // Người dùng đã đăng nhập
         const userRef = collection(FIREBASE_DB, 'User')
         const q = query(userRef, where('email', '==', user.email))
         const querySnapshot = await getDocs(q)
         querySnapshot.forEach((doc) => {
-          // Lấy dữ liệu của người dùng từ Firestore
           setUserData(doc.data())
         })
       } else {
-        // Người dùng đã đăng xuất
         setUserData(null)
       }
     })
     return () => {
-      // Hủy đăng ký lắng nghe khi unmount component
       unsubscribe()
     }
   }, [])

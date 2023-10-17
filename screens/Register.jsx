@@ -50,10 +50,9 @@ export default function Register() {
           },
           {
             text: 'OK',
-            onPress: () => navigation.navigate('Login')
+            onPress: () => navigation.navigate('PreHome')
           }
         ])
-        navigation.navigate('Login')
       })
       .catch((error) => {
         Alert.alert(
