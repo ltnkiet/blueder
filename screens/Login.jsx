@@ -5,7 +5,6 @@ import {
   TouchableOpacity,
   ActivityIndicator,
   Keyboard,
-  Button
 } from 'react-native'
 import React, { useState } from 'react'
 import { AntDesign } from '@expo/vector-icons'

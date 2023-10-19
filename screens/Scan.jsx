@@ -9,6 +9,7 @@ import {
   ScrollView
 } from 'react-native'
 
+
 // Import image
 import user1 from '../assets/img/3d1.png'
 
@@ -17,6 +18,7 @@ import { Feather } from '@expo/vector-icons'
 
 export default function Scan() {
   const [loading, setLoading] = useState(false)
+
 
   return (
     <View className='w-full h-full flex items-center'>
